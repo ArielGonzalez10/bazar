@@ -20,6 +20,8 @@ public interface IProductoService {
     
     public List<Producto> listaProductos();
     
+    public List<Producto> listaStockInsuficiente();
+    
     public Producto buscarProducto(Long p_codigo_producto);
     
     public void modificarProducto(Long p_codigo_producto, String p_nombre, String p_marca, Double p_costo, Double p_cantidad_disponible);

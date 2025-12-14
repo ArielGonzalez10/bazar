@@ -26,4 +26,13 @@ public interface IVentaService {
     public Venta buscarVenta(Long p_codigo_venta);
     
     public void modificarVenta(Long p_codigo_venta, LocalDate p_fecha_venta, Double p_total, List<Producto> p_productos, Cliente p_cliente);
+    
+    public List<Producto> listarProductosVenta(Long p_codigo_venta);
+    
+    public String ventasPorDia(LocalDate p_fecha_venta);
+    
+    public Double calcularMontoVentas(LocalDate p_fecha_venta);
+    
+    public int calcularCantidadVentas(LocalDate p_fecha_venta);
+    
 }

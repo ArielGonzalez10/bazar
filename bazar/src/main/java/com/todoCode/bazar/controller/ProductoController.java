@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 public class ProductoController {
-    
+    //Inyección de dependencia
     @Autowired
     private IProductoService productoServ;
 }

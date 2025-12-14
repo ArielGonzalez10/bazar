@@ -16,31 +16,37 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class ClienteService implements IClienteService {
+    //Inyección de dependencia
     @Autowired
     private IClienteRepository clienteRepo;
-
+    
+    //Guarda un cliente en la BD
     @Override
     public void crearCliente(Cliente p_cliente) {
         clienteRepo.save(p_cliente);
     }
-
+    
+    //Elimina un cliente de la BD
     @Override
     public void eliminarCliente(Long p_id_cliente) {
         clienteRepo.deleteById(p_id_cliente);
     }
 
+    //Lista los clientes de la BD
     @Override
     public List<Cliente> listaClientes() {
         List<Cliente> listClientes = clienteRepo.findAll();
         return listClientes;
     }
 
+    //Busca un cliente especifico en la BD
     @Override
     public Cliente buscarCliente(Long p_id_cliente) {
         Cliente cliBuscado = clienteRepo.findById(p_id_cliente).orElse(null);
         return cliBuscado;
     }
-
+    
+    //Modifica los datos de un cliente en la BD
     @Override
     public void modificarCliente(Long p_id_cliente, String p_nombre, String p_apellido, String p_dni) {
         Cliente cliModif = this.buscarCliente(p_id_cliente);
