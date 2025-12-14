@@ -4,6 +4,7 @@
  */
 package com.todoCode.bazar.service;
 
+import com.todoCode.bazar.dto.VentaDTO;
 import com.todoCode.bazar.model.Cliente;
 import com.todoCode.bazar.model.Producto;
 import com.todoCode.bazar.model.Venta;
@@ -97,4 +98,22 @@ public class VentaService implements IVentaService{
         return cantidadVentas;
     }
 
+    @Override
+    public VentaDTO obtenerMayorVenta() {
+        
+        VentaDTO mayorVenta = new VentaDTO();
+        double montoVentaAnt = 0;
+        
+        for(Venta venta: this.listaVentas()){
+            if(venta.getTotal() > montoVentaAnt){
+                mayorVenta.setApellidoCliente(venta.getCliente().getApellido());
+                mayorVenta.setNombreCliente(venta.getCliente().getNombre());
+                mayorVenta.setCodigo_venta(venta.getCodigo_venta());
+                mayorVenta.setTotal(venta.getTotal());
+                mayorVenta.setCantidadProductos(venta.getListaProductos().size());
+            }
+        }
+        
+        return mayorVenta;
+    }
 }

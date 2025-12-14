@@ -4,6 +4,7 @@
  */
 package com.todoCode.bazar.service;
 
+import com.todoCode.bazar.dto.VentaDTO;
 import com.todoCode.bazar.model.Cliente;
 import com.todoCode.bazar.model.Producto;
 import com.todoCode.bazar.model.Venta;
@@ -35,4 +36,5 @@ public interface IVentaService {
     
     public int calcularCantidadVentas(LocalDate p_fecha_venta);
     
+    public VentaDTO obtenerMayorVenta();
 }
