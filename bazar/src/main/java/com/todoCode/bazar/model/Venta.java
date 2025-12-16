@@ -13,13 +13,18 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import java.time.LocalDate;
 import java.util.List;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
  *
  * @author ariel
  */
+//Anotaciones necesarias
+@AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
 @Entity
@@ -39,17 +44,5 @@ public class Venta {
     @OneToOne
     @JoinColumn(name="cliente_id_cliente", referencedColumnName="id_cliente")
     private Cliente cliente;
-    
-    //Constructores
-    public Venta() {
-    }
-
-    public Venta(Long codigo_venta, LocalDate fecha_venta, Double total, List<Producto> listaProductos, Cliente cliente) {
-        this.codigo_venta = codigo_venta;
-        this.fecha_venta = fecha_venta;
-        this.total = total;
-        this.listaProductos = listaProductos;
-        this.cliente = cliente;
-    }
     
 }
