@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,48 +27,49 @@ import org.springframework.web.bind.annotation.RestController;
  *
  * @author ariel
  */
+@RequestMapping("/ventas")//Permite generalizar el inicio de la ruta de los endpoints
 @RestController
 public class VentaController {
     //Inyección de dependencia
     @Autowired
     private IVentaService ventaServ;
     
-    @PostMapping("/productos/crear")
-    public void crearProducto(@RequestBody Venta p_venta){
+    @PostMapping("/crear")
+    public void crearVenta(@RequestBody Venta p_venta){
         ventaServ.crearVenta(p_venta);
         System.out.println("Venta Creada correctamente");
     }
     
-    @DeleteMapping("/ventas/eliminar/{codigo_venta}")
+    @DeleteMapping("/eliminar/{codigo_venta}")
     public void eliminarVenta(@PathVariable Long codigo_venta){
         ventaServ.eliminarVenta(codigo_venta);
         System.out.println("Venta eliminada correctamente");
     }
     
-    @PutMapping("/ventas/editar/{codigo_venta}")
+    @PutMapping("/editar/{codigo_venta}")
     public void modificarVenta(@PathVariable Long codigo_venta,@RequestParam LocalDate fecha_venta,@RequestParam Double total,@RequestParam List<Producto> productos,@RequestParam Cliente cliente){
         ventaServ.modificarVenta(codigo_venta, fecha_venta, total, productos, cliente);
         System.out.println("Datos modificados correctamente");
     }
     
-    @GetMapping("/ventas")
+    @GetMapping("/listarVentas")
     public List<Venta> listarVentas(){
         return ventaServ.listaVentas();
     }
     
-    @GetMapping("/ventas/{codigo_venta}")
+    @GetMapping("/{codigo_venta}")
     @ResponseBody
     public Venta buscarVenta(@PathVariable Long codigo_venta){
         return ventaServ.buscarVenta(codigo_venta);
     }
     
-    @GetMapping("/ventas/productos/{codigo_venta}")
+    @GetMapping("/productos/{codigo_venta}")
     @ResponseBody
     public List<Producto> listarProductosVenta(@PathVariable Long codigo_venta){
         return ventaServ.listarProductosVenta(codigo_venta);
     }
     
-    @GetMapping("/ventas/{fecha_venta}")
+    @GetMapping("/{fecha_venta}")
     @ResponseBody
     public String totalVentaDia(@PathVariable LocalDate fecha_venta){
         return ventaServ.ventasPorDia(fecha_venta);
