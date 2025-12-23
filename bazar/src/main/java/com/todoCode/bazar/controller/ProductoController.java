@@ -61,7 +61,7 @@ public class ProductoController {
     
     @PutMapping("/modificar/{codigo_producto}")
     public void modificarProducto(@PathVariable Long codigo_producto,@RequestParam String nombre,@RequestParam String marca,@RequestParam Double costo, @RequestParam Double cantidad_disponible){
-        productoServ.modificarProducto(codigo_producto, nombre, marca, Double.NaN, Double.POSITIVE_INFINITY);
+        productoServ.modificarProducto(codigo_producto, nombre, marca, costo, cantidad_disponible);
         System.out.println("Producto modificado correctamente");
     }
 }

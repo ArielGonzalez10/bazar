@@ -1,0 +1,36 @@
+version: '3.9'
+
+services:
+  bazar_app:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: 12345
+      MYSQL_DATABASE: bazar
+    ports:
+      - "3306:3306"
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 5s
+      timeout: 10s
+      retries: 5
+    volumes:
+      - bazar_app-data:/var/lib/mysql
+    restart: always
+
+  bazar-app:
+    build: ./bazar
+    ports:
+      - "8080:8080"
+    environment:
+      # Asegúrate de que no haya espacios en blanco al final de la URL
+      DB_URL: "jdbc:mysql://bazar_app:3306/bazar?createDatabaseIfNotExist=true&serverTimezone=UTC"
+      DB_USER_NAME: root
+      DB_USER_PASSWORD: 12345
+    depends_on:
+      bazar_app:
+        condition: service_healthy
+    restart: always
+
+volumes:
+  bazar_app-data:
+
